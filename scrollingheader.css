@@ -1,0 +1,16 @@
+
+#header {
+background-repeat: repeat;
+-webkit-animation: banner 300s infinite linear;
+animation: banner 300s infinite linear;
+ }
+
+@-webkit-keyframes banner {
+from { background-position: 0 0px; }
+to { background-position: -5402px 500px; }
+}
+@keyframes banner {
+from { background-position: 0 0px; }
+to { background-position: -5402px 0px; }
+}
+

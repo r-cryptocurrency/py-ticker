@@ -1,30 +1,16 @@
-import reddit
-import cmc
+import imggen
+import praw
+from userpw import *
 
-prawer = reddit.prawer()
-prawer.r.login(reddit.username, reddit.password)
+tickerimg = imggen.imggen()
 
-sub = prawer.r.get_subreddit('xdn')
-ss = sub.get_stylesheet()
+reddit = praw.Reddit(client_id=client_id, client_secret=client_secret,
+                     username=username, password=password,
+                     user_agent=user_agent)
 
-ticker_text = cmc.getcmc()
-
-ss_text = """
-#header {
-background-repeat: repeat;
--webkit-animation: banner 300s infinite linear;
-animation: banner 300s infinite linear;
- }
-
-@-webkit-keyframes banner {
-from { background-position: 0 0px; }
-to { background-position: -5402px 500px; }
-}
-@keyframes banner {
-from { background-position: 0 0px; }
-to { background-position: -5402px 0px; }
-}
-"""
-
-sub.set_stylesheet(ss_text)
+print(reddit.user.me())
+sub = reddit.subreddit('ccticker')
 print(sub.title)
+ss = sub.stylesheet()
+sub.stylesheet.upload("ticker", "img/temp/ticker.png")
+sub.stylesheet.update(stylesheettext)

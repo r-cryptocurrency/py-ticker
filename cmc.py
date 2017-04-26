@@ -13,6 +13,6 @@ def getcmc():
         print("Failed to get CMC via API")
         with open('cachedCMC.txt', 'r') as f:
             j = f.read().json()
-    for i in j:
-        ticker_string += "|{}|${}|B{}".format(i['symbol'], i['price_usd'], i['price_btc'])
-    return ticker_string
+    # for i in j:
+    #     print(i)
+    return j
