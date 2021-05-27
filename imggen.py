@@ -19,7 +19,8 @@ def imggen(cmcdata):
     for idx,val in enumerate(cmcdata):
         coinimg = Image.open("img/newcoin/unknown.png")
         try: 
-            coinimg = Image.open("img/newcoin/{}.png".format(val["id"]))
+            print("Attempting to add picture of {}".format(val["slug"]))
+            coinimg = Image.open("img/newcoin/{}.png".format(val["slug"]))
         except:
             pass 
         tickerimg.paste(coinimg, (0, idx*64))

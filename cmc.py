@@ -1,11 +1,23 @@
 import requests
 
-cmcurl = 'https://api.coinmarketcap.com/v1/ticker?limit=10'
-
 def getcmc():
+    url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
+    apikey = 'd3c686b8-d6ab-4c27-8ed9-39e0bd8c254b'
+    parameters = {
+            'start':'1',
+            'limit':'10',
+
+            }
+    headers = {
+        'Accepts': 'application/json',
+        'X-CMC_PRO_API_KEY': apikey,
+        }
+    session = requests.Session()
+    session.headers.update(headers)
+
     ticker_string = ''
     try:
-        r = requests.get('https://api.coinmarketcap.com/v1/ticker?limit=10')
+        r = session.get(url, params=parameters)
         j = r.json()
         with open('cachedCMC.txt', 'w') as f:
             f.write(r.text)
