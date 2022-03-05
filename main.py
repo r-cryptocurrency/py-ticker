@@ -43,15 +43,18 @@ try:
     sidebar_contents = settings['description']
     if len(cmctext) > 30:
         sidebar_contents = re.sub(r'(1\. \*\*Bitcoin.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+)', cmctext, sidebar_contents)
+        # print(sidebar_contents)
         # sub.stylesheet.upload("ticker", "img/temp/ticker.png")
         sub.stylesheet.upload("crypto-top10", "img/temp/ticker.png")
         sub.stylesheet.update(sstext)
-        praw.models.reddit.subreddit.SubredditModeration(sub).update(description=sidebar_contents)
+        # praw.models.reddit.subreddit.SubredditModeration(sub).update(description=sidebar_contents)
+        sub.wiki['config/sidebar'].edit(sidebar_contents)
         with open('pyticker.log', 'a') as f:
             f.write("{} - successfully updated reddit\n".format(str(datetime.now())))
     else:
         with open('pyticker.log', 'a') as f:
             f.write("{} - failed because cmctext too short\n".format(str(datetime.now())))
-except:
+except Exception as e:
     with open('pyticker.log', 'a') as f:
-        f.write("{} - failed to update reddit\n".format(str(datetime.now())))
+        f.write("{} - failed to update reddit due to: {}\n".format(str(datetime.now()), e))
+        print("{} - failed to update reddit due to: {}\n".format(str(datetime.now()), e))
